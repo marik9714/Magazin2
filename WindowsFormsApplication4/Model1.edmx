@@ -1,0 +1,457 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Магазин2Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6013: Первичный ключ в таблице или представлении "Магазин2.dbo.Вывод товаров поставщика" не определен, его не удалось вывести. Эта таблица или представление исключены. Чтобы использовать сущность, необходимо проверить схему, добавить правильные ключи и раскомментировать ее.
+        <EntityType Name="Вывод товаров поставщика">
+          <Property Name="Наименование" Type="nvarchar" MaxLength="255" />
+          <Property Name="Цена" Type="money" />
+          <Property Name="Организация" Type="nvarchar" MaxLength="255" />
+        </EntityType>-->
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Магазин2.dbo.Клиенты" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Клиенты">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="int" Nullable="false" />
+          <Property Name="Фамилия" Type="nvarchar" MaxLength="255" />
+          <Property Name="Имя" Type="nvarchar" MaxLength="255" />
+          <Property Name="Отчество" Type="nvarchar" MaxLength="255" />
+          <Property Name="Организация" Type="nvarchar" MaxLength="255" />
+          <Property Name="Телефон" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6013: Первичный ключ в таблице или представлении "Магазин2.dbo.Недавние поступления" не определен, его не удалось вывести. Эта таблица или представление исключены. Чтобы использовать сущность, необходимо проверить схему, добавить правильные ключи и раскомментировать ее.
+        <EntityType Name="Недавние поступления">
+          <Property Name="Товар_ID" Type="int" />
+          <Property Name="Кол-во" Type="int" />
+          <Property Name="Цена" Type="money" />
+          <Property Name="Поставщик_ID" Type="int" />
+          <Property Name="Дата" Type="datetime" />
+        </EntityType>-->
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Магазин2.dbo.Отделы" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Отделы">
+          <Key>
+            <PropertyRef Name="Отдел_ID" />
+          </Key>
+          <Property Name="Отдел_ID" Type="int" Nullable="false" />
+          <Property Name="Отдел" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Магазин2.dbo.Поставщики" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Поставщики">
+          <Key>
+            <PropertyRef Name="Поставщик_ID" />
+          </Key>
+          <Property Name="Поставщик_ID" Type="int" Nullable="false" />
+          <Property Name="Организация" Type="nvarchar" MaxLength="255" />
+          <Property Name="Телефон" Type="nvarchar" MaxLength="255" />
+          <Property Name="Адрес" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Магазин2.dbo.Поступления" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Поступления">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="int" Nullable="false" />
+          <Property Name="Дата" Type="datetime" />
+          <Property Name="Товар_ID" Type="int" />
+          <Property Name="Кол-во" Type="int" />
+          <Property Name="Цена" Type="money" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Магазин2.dbo.Продажи" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Продажи">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="int" Nullable="false" />
+          <Property Name="Товар" Type="int" />
+          <Property Name="Количество" Type="int" />
+          <Property Name="Клиент_ID" Type="int" />
+          <Property Name="Сотрудник_ID" Type="int" />
+          <Property Name="Номер_продажи" Type="int" />
+          <Property Name="Дата_продажи" Type="datetime" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Магазин2.dbo.Самый дорогой товар" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Самый дорогой товар">
+          <Key>
+            <PropertyRef Name="Товар_ID" />
+          </Key>
+          <Property Name="Товар_ID" Type="int" Nullable="false" />
+          <Property Name="Наименование" Type="nvarchar" MaxLength="255" />
+          <Property Name="Количество" Type="int" />
+          <Property Name="Цена" Type="money" />
+          <Property Name="Поставщик_ID" Type="int" />
+          <Property Name="Отдел_ID" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Магазин2.dbo.Сотрудники" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Сотрудники">
+          <Key>
+            <PropertyRef Name="Сотрудник_ID" />
+          </Key>
+          <Property Name="Сотрудник_ID" Type="int" Nullable="false" />
+          <Property Name="Фамилия" Type="nvarchar" MaxLength="255" />
+          <Property Name="Имя" Type="nvarchar" MaxLength="255" />
+          <Property Name="Отчество" Type="nvarchar" MaxLength="255" />
+          <Property Name="Отдел_ID" Type="int" />
+          <Property Name="Адрес" Type="nvarchar" MaxLength="255" />
+          <Property Name="Дата_приема" Type="datetime" />
+          <Property Name="Пароль" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Магазин2.dbo.Товары" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Товары">
+          <Key>
+            <PropertyRef Name="Товар_ID" />
+            <PropertyRef Name="Поставщик_ID" />
+          </Key>
+          <Property Name="Товар_ID" Type="int" Nullable="false" />
+          <Property Name="Наименование" Type="nvarchar" MaxLength="255" />
+          <Property Name="Количество" Type="int" />
+          <Property Name="Цена" Type="money" />
+          <Property Name="Поставщик_ID" Type="int" Nullable="false" />
+          <Property Name="Отдел_ID" Type="int" />
+        </EntityType>
+        <EntityContainer Name="Хранилище Магазин2ModelContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Клиенты" EntityType="Self.Клиенты" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Клиенты].[Код] AS [Код], 
+    [Клиенты].[Фамилия] AS [Фамилия], 
+    [Клиенты].[Имя] AS [Имя], 
+    [Клиенты].[Отчество] AS [Отчество], 
+    [Клиенты].[Организация] AS [Организация], 
+    [Клиенты].[Телефон] AS [Телефон]
+    FROM [dbo].[Клиенты] AS [Клиенты]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Отделы" EntityType="Self.Отделы" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Отделы].[Отдел_ID] AS [Отдел_ID], 
+    [Отделы].[Отдел] AS [Отдел]
+    FROM [dbo].[Отделы] AS [Отделы]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Поставщики" EntityType="Self.Поставщики" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Поставщики].[Поставщик_ID] AS [Поставщик_ID], 
+    [Поставщики].[Организация] AS [Организация], 
+    [Поставщики].[Телефон] AS [Телефон], 
+    [Поставщики].[Адрес] AS [Адрес]
+    FROM [dbo].[Поставщики] AS [Поставщики]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Поступления" EntityType="Self.Поступления" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Поступления].[Код] AS [Код], 
+    [Поступления].[Дата] AS [Дата], 
+    [Поступления].[Товар_ID] AS [Товар_ID], 
+    [Поступления].[Кол-во] AS [Кол-во], 
+    [Поступления].[Цена] AS [Цена]
+    FROM [dbo].[Поступления] AS [Поступления]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Продажи" EntityType="Self.Продажи" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Продажи].[Код] AS [Код], 
+    [Продажи].[Товар] AS [Товар], 
+    [Продажи].[Количество] AS [Количество], 
+    [Продажи].[Клиент_ID] AS [Клиент_ID], 
+    [Продажи].[Сотрудник_ID] AS [Сотрудник_ID], 
+    [Продажи].[Номер_продажи] AS [Номер_продажи], 
+    [Продажи].[Дата_продажи] AS [Дата_продажи]
+    FROM [dbo].[Продажи] AS [Продажи]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Самый дорогой товар" EntityType="Self.Самый дорогой товар" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Самый дорогой товар].[Товар_ID] AS [Товар_ID], 
+    [Самый дорогой товар].[Наименование] AS [Наименование], 
+    [Самый дорогой товар].[Количество] AS [Количество], 
+    [Самый дорогой товар].[Цена] AS [Цена], 
+    [Самый дорогой товар].[Поставщик_ID] AS [Поставщик_ID], 
+    [Самый дорогой товар].[Отдел_ID] AS [Отдел_ID]
+    FROM [dbo].[Самый дорогой товар] AS [Самый дорогой товар]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Сотрудники" EntityType="Self.Сотрудники" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Сотрудники].[Сотрудник_ID] AS [Сотрудник_ID], 
+    [Сотрудники].[Фамилия] AS [Фамилия], 
+    [Сотрудники].[Имя] AS [Имя], 
+    [Сотрудники].[Отчество] AS [Отчество], 
+    [Сотрудники].[Отдел_ID] AS [Отдел_ID], 
+    [Сотрудники].[Адрес] AS [Адрес], 
+    [Сотрудники].[Дата_приема] AS [Дата_приема], 
+    [Сотрудники].[Пароль] AS [Пароль]
+    FROM [dbo].[Сотрудники] AS [Сотрудники]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Товары" EntityType="Self.Товары" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Товары].[Товар_ID] AS [Товар_ID], 
+    [Товары].[Наименование] AS [Наименование], 
+    [Товары].[Количество] AS [Количество], 
+    [Товары].[Цена] AS [Цена], 
+    [Товары].[Поставщик_ID] AS [Поставщик_ID], 
+    [Товары].[Отдел_ID] AS [Отдел_ID]
+    FROM [dbo].[Товары] AS [Товары]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Магазин2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Клиенты">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="Int32" Nullable="false" />
+          <Property Name="Фамилия" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Имя" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Отчество" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Организация" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Телефон" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Отделы">
+          <Key>
+            <PropertyRef Name="Отдел_ID" />
+          </Key>
+          <Property Name="Отдел_ID" Type="Int32" Nullable="false" />
+          <Property Name="Отдел" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Поставщики">
+          <Key>
+            <PropertyRef Name="Поставщик_ID" />
+          </Key>
+          <Property Name="Поставщик_ID" Type="Int32" Nullable="false" />
+          <Property Name="Организация" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Телефон" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Адрес" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Поступления">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="Int32" Nullable="false" />
+          <Property Name="Дата" Type="DateTime" Precision="3" />
+          <Property Name="Товар_ID" Type="Int32" />
+          <Property Name="Кол_во" Type="Int32" />
+          <Property Name="Цена" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="Продажи">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="Int32" Nullable="false" />
+          <Property Name="Товар" Type="Int32" />
+          <Property Name="Количество" Type="Int32" />
+          <Property Name="Клиент_ID" Type="Int32" />
+          <Property Name="Сотрудник_ID" Type="Int32" />
+          <Property Name="Номер_продажи" Type="Int32" />
+          <Property Name="Дата_продажи" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Самый_дорогой_товар">
+          <Key>
+            <PropertyRef Name="Товар_ID" />
+          </Key>
+          <Property Name="Товар_ID" Type="Int32" Nullable="false" />
+          <Property Name="Наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Количество" Type="Int32" />
+          <Property Name="Цена" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Поставщик_ID" Type="Int32" />
+          <Property Name="Отдел_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Сотрудники">
+          <Key>
+            <PropertyRef Name="Сотрудник_ID" />
+          </Key>
+          <Property Name="Сотрудник_ID" Type="Int32" Nullable="false" />
+          <Property Name="Фамилия" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Имя" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Отчество" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Отдел_ID" Type="Int32" />
+          <Property Name="Адрес" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Дата_приема" Type="DateTime" Precision="3" />
+          <Property Name="Пароль" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Товары">
+          <Key>
+            <PropertyRef Name="Товар_ID" />
+            <PropertyRef Name="Поставщик_ID" />
+          </Key>
+          <Property Name="Товар_ID" Type="Int32" Nullable="false" />
+          <Property Name="Наименование" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Количество" Type="Int32" />
+          <Property Name="Цена" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Поставщик_ID" Type="Int32" Nullable="false" />
+          <Property Name="Отдел_ID" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="Магазин2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Клиенты" EntityType="Self.Клиенты" />
+          <EntitySet Name="Отделы" EntityType="Self.Отделы" />
+          <EntitySet Name="Поставщики" EntityType="Self.Поставщики" />
+          <EntitySet Name="Поступления" EntityType="Self.Поступления" />
+          <EntitySet Name="Продажи" EntityType="Self.Продажи" />
+          <EntitySet Name="Самый_дорогой_товар" EntityType="Self.Самый_дорогой_товар" />
+          <EntitySet Name="Сотрудники" EntityType="Self.Сотрудники" />
+          <EntitySet Name="Товары" EntityType="Self.Товары" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Магазин2ModelContainer" CdmEntityContainer="Магазин2Entities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Магазин2Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Клиенты">
+            <EntityTypeMapping TypeName="Магазин2Model.Клиенты">
+              <MappingFragment StoreEntitySet="Клиенты">
+                <ScalarProperty Name="Код" ColumnName="Код" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Организация" ColumnName="Организация" />
+                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Отделы">
+            <EntityTypeMapping TypeName="Магазин2Model.Отделы">
+              <MappingFragment StoreEntitySet="Отделы">
+                <ScalarProperty Name="Отдел_ID" ColumnName="Отдел_ID" />
+                <ScalarProperty Name="Отдел" ColumnName="Отдел" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Поставщики">
+            <EntityTypeMapping TypeName="Магазин2Model.Поставщики">
+              <MappingFragment StoreEntitySet="Поставщики">
+                <ScalarProperty Name="Поставщик_ID" ColumnName="Поставщик_ID" />
+                <ScalarProperty Name="Организация" ColumnName="Организация" />
+                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+                <ScalarProperty Name="Адрес" ColumnName="Адрес" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Поступления">
+            <EntityTypeMapping TypeName="Магазин2Model.Поступления">
+              <MappingFragment StoreEntitySet="Поступления">
+                <ScalarProperty Name="Код" ColumnName="Код" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="Товар_ID" ColumnName="Товар_ID" />
+                <ScalarProperty Name="Кол_во" ColumnName="Кол-во" />
+                <ScalarProperty Name="Цена" ColumnName="Цена" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Продажи">
+            <EntityTypeMapping TypeName="Магазин2Model.Продажи">
+              <MappingFragment StoreEntitySet="Продажи">
+                <ScalarProperty Name="Код" ColumnName="Код" />
+                <ScalarProperty Name="Товар" ColumnName="Товар" />
+                <ScalarProperty Name="Количество" ColumnName="Количество" />
+                <ScalarProperty Name="Клиент_ID" ColumnName="Клиент_ID" />
+                <ScalarProperty Name="Сотрудник_ID" ColumnName="Сотрудник_ID" />
+                <ScalarProperty Name="Номер_продажи" ColumnName="Номер_продажи" />
+                <ScalarProperty Name="Дата_продажи" ColumnName="Дата_продажи" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Самый_дорогой_товар">
+            <EntityTypeMapping TypeName="Магазин2Model.Самый_дорогой_товар">
+              <MappingFragment StoreEntitySet="Самый дорогой товар">
+                <ScalarProperty Name="Товар_ID" ColumnName="Товар_ID" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="Количество" ColumnName="Количество" />
+                <ScalarProperty Name="Цена" ColumnName="Цена" />
+                <ScalarProperty Name="Поставщик_ID" ColumnName="Поставщик_ID" />
+                <ScalarProperty Name="Отдел_ID" ColumnName="Отдел_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Сотрудники">
+            <EntityTypeMapping TypeName="Магазин2Model.Сотрудники">
+              <MappingFragment StoreEntitySet="Сотрудники">
+                <ScalarProperty Name="Сотрудник_ID" ColumnName="Сотрудник_ID" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Отчество" ColumnName="Отчество" />
+                <ScalarProperty Name="Отдел_ID" ColumnName="Отдел_ID" />
+                <ScalarProperty Name="Адрес" ColumnName="Адрес" />
+                <ScalarProperty Name="Дата_приема" ColumnName="Дата_приема" />
+                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Товары">
+            <EntityTypeMapping TypeName="Магазин2Model.Товары">
+              <MappingFragment StoreEntitySet="Товары">
+                <ScalarProperty Name="Товар_ID" ColumnName="Товар_ID" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="Количество" ColumnName="Количество" />
+                <ScalarProperty Name="Цена" ColumnName="Цена" />
+                <ScalarProperty Name="Поставщик_ID" ColumnName="Поставщик_ID" />
+                <ScalarProperty Name="Отдел_ID" ColumnName="Отдел_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
